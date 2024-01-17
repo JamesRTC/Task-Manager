@@ -1,25 +1,30 @@
-import logo from './logo.svg';
+
 import './App.css';
+import { TaskProvider} from './Context/TaskProvider';
+import { Task } from './components/Task.js';
+import { Header } from './components/Header.js';
+import { Form } from './components/Form.js';
+import { Footer } from './components/Footer.js';
+
+
 
 function App() {
+ 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header/>
+      <Form/>
+      <Task/>
+      <Footer/>
     </div>
   );
 }
 
-export default App;
+const AppWrapper = () => (
+  <TaskProvider>
+    <App />
+  </TaskProvider>
+);
+
+export default AppWrapper;
+

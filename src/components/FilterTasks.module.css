@@ -1,0 +1,14 @@
+.filterWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    /* margin-top: 0; */
+    padding: 1rem;
+    /* background-color:  #fff; */
+    border-radius: 1rem;
+}
+
+.filter {
+    margin-left: 0.5rem;
+}

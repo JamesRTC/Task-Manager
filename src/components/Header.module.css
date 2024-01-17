@@ -1,0 +1,13 @@
+.headerWrapper {
+    /* background-color: #F8F7D5; */
+    background-color: #000;
+    color: #F8F7D5;
+}
+
+.appTitle {
+    text-align: center;
+}
+
+.appDescription {
+    text-align: center;
+}

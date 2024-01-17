@@ -1,0 +1,14 @@
+.form {
+    /* background-color: #F8F7D5; */
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    background-color: #000;
+    color: #F8F7D5; 
+}
+
+
+.priority {
+    margin-left: 0.5rem;
+}
