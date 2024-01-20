@@ -2,19 +2,16 @@ import { useState } from "react";
 import { nanoid } from "nanoid";
 import { useTaskContext} from "../Context/TaskProvider";
 import { Button } from "./Button";
-
 import styles from './Form.module.css'
 
-
-
 export const Form = () => {
-    const {handleSubmitTask, setTask } = useTaskContext();
-    
-    const [todo, setTodo] = useState("")
-    const [priority, setPriority]= useState("")
+  const { handleSubmitTask, setTask } = useTaskContext();
 
+    const [todo, setTodo] = useState("");
+    const [priority, setPriority]= useState("");
 
-  function handleFormInputs () {
+  
+    function handleFormInputs () {
       setTask ({activity: todo, id: nanoid(), priority: priority || "unspecified", completed: false});
       setTodo("");
       setPriority("");

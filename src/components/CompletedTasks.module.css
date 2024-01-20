@@ -1,0 +1,14 @@
+.completedTasks {
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #F8F7D5;
+    padding-top: 1.5rem;
+    font-weight: bold;
+}
+
+.count {
+    color: crimson;
+    margin-left: 0.5rem;
+}

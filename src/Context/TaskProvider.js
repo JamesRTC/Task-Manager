@@ -1,9 +1,12 @@
 import { createContext, useContext, useEffect, useReducer, useState } from 'react';
 
 const TaskContext = createContext();
+
 const initialState = {
-  tasks: [],
+  tasks: []
 };
+
+
 
 function reducer(state, action) {
   switch (action.type) {
@@ -17,6 +20,8 @@ function reducer(state, action) {
       return {...state, tasks: state.tasks.filter(task=> task.id !== action.payload)}
     case "completing":
       return {...state, tasks: state.tasks.map(task=> task.id === action.payload? {...task, completed: !task.completed} : task)}
+    case "clearTasks":
+      return {...state, tasks: action.payload !== "all"? state.tasks.filter(task=> task.priority !== action.payload) : []}
     default:
       throw new Error('There was an error');
   }
@@ -25,28 +30,8 @@ function reducer(state, action) {
 export const TaskProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [task, setTask] = useState({ activity: '', id: '', priority: '', completed: false });
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
   const [{ tasks }, dispatch] = useReducer(reducer, initialState);
-  // const [completed, setCompleted] = useState (false)
-
-  
-
-  useEffect(() => {
-    try {
-      const storedData = JSON.parse(localStorage.getItem('myTasks'));
-      if (storedData) {
-        dispatch({ type: 'setTasks', payload: storedData });
-      }
-  
-      if (!storedData) {
-        throw new Error("There are no tasks to display at the moment");
-      }
-    } catch (error) {
-      setError(error);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
 
   useEffect(() => {
     try {
@@ -55,12 +40,24 @@ export const TaskProvider = ({ children }) => {
       }
     } catch (error) {
       console.error('Error saving tasks to localStorage:', error);
-    }
+    } 
   }, [tasks, loading]);
 
 
+  useEffect(() => {
+    try {  
+      const storedData = JSON.parse(localStorage.getItem('myTasks'));
+      if (storedData && storedData.length > 0) {
+        dispatch({ type: 'setTasks', payload: storedData });
+      } 
+    } finally {
+      setLoading(false);
+    }
+  }, []); // empty dependency array to run only once
+
   function handleSubmitTask(e) {
     e.preventDefault();
+   
     if (task.activity.trim() !== '') {
       dispatch({ type: 'adding', payload: task });
     }
@@ -71,7 +68,6 @@ export const TaskProvider = ({ children }) => {
   }
 
   function handleEditTask(id, editedvalue, prevActivity, priority) {
-    // Dispatch an action for editing with the task id and the new activity
     dispatch({
       type: 'editing',
       payload: tasks.map((task) =>
@@ -86,10 +82,13 @@ export const TaskProvider = ({ children }) => {
     dispatch({type: "completing", payload: id})
   }
 
+  function clearTasks (filter) {
+    dispatch ({type: "clearTasks", payload: filter})
+  }
 
   return (
     <TaskContext.Provider
-      value={{ tasks, task, setTask, handleSubmitTask, handleDeleteTask, handleEditTask, handleCompleteTask, error}}
+      value={{ tasks, task, setTask, handleSubmitTask, handleDeleteTask, handleEditTask, handleCompleteTask, clearTasks, error }}
     >
       {children}
     </TaskContext.Provider>

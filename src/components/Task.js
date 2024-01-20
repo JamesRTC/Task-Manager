@@ -18,16 +18,14 @@ export const Task = () => {
   const filteredTasks = () => {
     switch (filter) {
       case 'all':
-        return tasks.filter(task => task.priority === "urgent" || "less-urgent" || "very urgent" || "unspecified");
+        return tasks;
       case 'urgent':
-        return tasks.filter(task => task.priority === 'urgent');
       case 'less-urgent':
-        return tasks.filter(task => task.priority === 'less-urgent');
       case 'unspecified':
-        return tasks.filter(task => task.priority === 'unspecified');
       case 'very-urgent':
-        return tasks.filter(task => task.priority === 'very-urgent');
-      // Add more cases for other filters as needed
+        return tasks.filter(task => task.priority === filter);
+      case "clear-tasks":
+        return []
       default:
         return tasks;
     }
@@ -53,20 +51,21 @@ export const Task = () => {
     handleCompleteTask (id)
   }
 
-  if (error) return <Message message={error.message} />;
-  if (tasks.length === 0) return <Message message="There are no tasks to display at the moment" />;
+
+
+  if (tasks.length === 0) return <Message message="No tasks to display at the moment" />;
   if (filteredTasks().length === 0) {
     return (
       <>
       <FilterTasks setFilter={setFilter} filter = {filter}/>
-      <Message message = "There are no tasks of this priority to display at the moment"/>
+      <Message message = "No tasks of this priority to display at the moment"/>
       </>
     )
   } 
   return (
     <div className={styles.taskWrapper}>
 
-      <FilterTasks setFilter={setFilter} filter = {filter}/>
+      <FilterTasks setFilter={setFilter} filter = {filter}/> 
 
       {filteredTasks().map((task, index) => (
         <div className={`${styles.taskDiv} ${task.completed? styles.completed : ""}`} key={task.id}>

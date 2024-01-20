@@ -29,6 +29,7 @@ li {
 
 .numbering {
     margin-right: 1rem;
+    font-size: 2rem;
 }
 
 .delete {
@@ -36,6 +37,7 @@ li {
     align-items: center;
     justify-content: center;
     position: relative;
+    transition: all 0.5s;
    
 }
 
@@ -48,6 +50,7 @@ li {
     align-items: center;
     justify-content: center;
     position: relative;
+    transition: all 0.5s;
 }
 
 .edit:hover {
@@ -61,6 +64,7 @@ li {
     padding-left: 1rem;
     padding-right: 1rem;
     position: relative;
+    transition: all 0.15s;
 }
 
 .finish:hover {

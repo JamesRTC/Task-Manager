@@ -1,11 +1,12 @@
 .form {
     /* background-color: #F8F7D5; */
-    padding-top: 3rem;
+    padding-top: 1rem;
     padding-bottom: 2rem;
     display: flex;
     justify-content: center;
     background-color: #000;
     color: #F8F7D5; 
+    /* gap: 2rem; */
 }
 
 
